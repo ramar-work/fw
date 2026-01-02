@@ -15,6 +15,7 @@ sleep 1
 # Find the possible interfaces
 while [ -z $CHOICE ]
 do
+	COUNTER=1
 	echo
 	echo "What interface are you running your firewall on?" 
 	echo "Available choices are:"
@@ -26,6 +27,12 @@ do
 		COUNTER=$(( $COUNTER + 1 ))
 	done
 	read CHOICE
+
+	if [ -z "$CHOICE" ]
+	then
+		echo "No option chosen (please type a number)..."
+		continue
+	fi
 
 	if [[ $CHOICE == [A-Za-z]* ]] || [ $CHOICE -gt ${#CHOICES[@]} ] || [ "$CHOICE" -lt 0 ]
 	then
